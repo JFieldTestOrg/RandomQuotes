@@ -2,6 +2,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.dockerSupport
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetTest
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
@@ -81,6 +82,14 @@ object Build : BuildType({
             param("octopus_project_name", "Random Quotes")
             param("octopus_deployto", "Development")
             param("secure:octopus_apikey", "credentialsJSON:ebf43188-0e85-451a-aefe-1e2c020a09a6")
+        }
+        exec {
+            path = "gitversion.exe"
+            arguments = "/output buildserver /updateassemblyinfo true"
+            formatStderrAsError = true
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
     }
 
