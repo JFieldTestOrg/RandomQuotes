@@ -48,6 +48,10 @@ project {
 object Build : BuildType({
     name = "Build"
 
+    params {
+        param("env.Git_Branch", "${DslContext.settingsRoot.paramRefs.buildVcsBranch}")
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
