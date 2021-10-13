@@ -2,6 +2,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.dockerSupport
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetTest
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
@@ -47,17 +48,31 @@ project {
 object Build : BuildType({
     name = "Build"
 
+    params {
+        param("env.Git_Branch", "${DslContext.settingsRoot.paramRefs.buildVcsBranch}")
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
 
     steps {
+        exec {
+            name = "GItversion"
+            path = "gitversion.exe"
+            arguments = "/output buildserver /updateassemblyinfo true"
+            formatStderrAsError = true
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
+        }
         dotnetTest {
             name = "DotNet Test"
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
         dockerCommand {
             name = "Docker Build"
+            enabled = false
             commandType = build {
                 source = file {
                     path = "RandomQuotes/Dockerfile"
@@ -68,6 +83,7 @@ object Build : BuildType({
         }
         dockerCommand {
             name = "Docker Push"
+            enabled = false
             commandType = push {
                 namesAndTags = "docker-local.devops.ow.npres.local/randomquotes:1.0.%build.counter%"
             }
@@ -75,6 +91,7 @@ object Build : BuildType({
         step {
             name = "Create and deploy release"
             type = "octopus.create.release"
+            enabled = false
             param("octopus_space_name", "Spaces-22")
             param("octopus_version", "3.0+")
             param("octopus_host", "https://octopus.corp.diligent.com")
