@@ -48,6 +48,8 @@ project {
 object Build : BuildType({
     name = "Build"
 
+    publishArtifacts = PublishMode.SUCCESSFUL
+
     params {
         param("env.Git_Branch", "${DslContext.settingsRoot.paramRefs.buildVcsBranch}")
     }
