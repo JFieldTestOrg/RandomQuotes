@@ -78,6 +78,7 @@ object Build : BuildType({
         }
         dockerCommand {
             name = "Docker Push"
+            enabled = false
             commandType = push {
                 namesAndTags = "docker-local.devops.ow.npres.local/randomquotes:1.0.%build.counter%"
             }
