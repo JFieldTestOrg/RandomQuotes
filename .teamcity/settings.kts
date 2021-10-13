@@ -61,7 +61,7 @@ object Build : BuildType({
     steps {
         exec {
             name = "GItversion"
-            path = "gitversion.exe"
+            path = "gitversion"
             arguments = "/output buildserver /updateassemblyinfo true"
             formatStderrAsError = true
             param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
