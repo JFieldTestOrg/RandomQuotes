@@ -87,6 +87,7 @@ object Build : BuildType({
         step {
             name = "Create and deploy release"
             type = "octopus.create.release"
+            enabled = false
             param("octopus_space_name", "Spaces-22")
             param("octopus_version", "3.0+")
             param("octopus_host", "https://octopus.corp.diligent.com")
