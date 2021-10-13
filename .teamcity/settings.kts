@@ -114,9 +114,6 @@ object Build : BuildType({
 
     features {
         dockerSupport {
-            loginToRegistry = on {
-                dockerRegistryId = "PROJECT_EXT_11"
-            }
         }
     }
 })
