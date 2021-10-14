@@ -1,0 +1,26 @@
+step "Run Docker RandomQuoutes" {
+    properties = {
+        Octopus.Action.TargetRoles = "Docker"
+    }
+
+    action {
+        action_type = "Octopus.DockerRun"
+        properties = {
+            Octopus.Action.Docker.PortAutoMap = "True"
+            Octopus.Action.Docker.RestartPolicy = "unless-stopped"
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "randomquotes-docker"
+            Octopus.Action.Package.PackageId = "randomquotes"
+        }
+        worker_pool_variable = ""
+
+        packages {
+            acquisition_location = "Server"
+            feed = "randomquotes-docker"
+            package_id = "randomquotes"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}
