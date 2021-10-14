@@ -25,7 +25,7 @@ step "Run Docker RandomQuoutes" {
     }
 }
 
-step "Dokcker ps" {
+step "Docker ps" {
     properties = {
         Octopus.Action.TargetRoles = "Docker"
     }
