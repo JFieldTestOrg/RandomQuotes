@@ -42,6 +42,13 @@ project {
             userName = "svc-automation"
             password = "credentialsJSON:abfa4e5f-4057-43e3-aff1-583d81bfcb18"
         }
+        dockerRegistry {
+            id = "PROJECT_EXT_7"
+            name = "Cloudsmith Docker"
+            url = "https://docker.cloudsmith.io"
+            userName = "dil-svc-pkg-mgr+writer@diligent.com"
+            password = "credentialsJSON:33cad918-92d5-4c99-8864-1ed076e18cbe"
+        }
     }
 }
 
