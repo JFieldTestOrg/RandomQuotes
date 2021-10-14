@@ -111,7 +111,7 @@ object Build : BuildType({
             param("octopus_version", "3.0+")
             param("octopus_host", "https://diligent-test.octopus.app")
             param("octopus_project_name", "RandomQuotes")
-            param("octopus_deployto", "Development")
+            param("octopus_deployto", "Test")
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
         }
