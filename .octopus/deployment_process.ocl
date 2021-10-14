@@ -1,3 +1,18 @@
+step "Remove old Docker containers" {
+    properties = {
+        Octopus.Action.TargetRoles = "Docker"
+    }
+
+    action {
+        action_type = "Octopus.DockerStop"
+        properties = {
+            Octopus.Action.Docker.Remove = "True"
+            Octopus.Action.Docker.RemoveSteps = "run-docker-randomquoutes"
+        }
+        worker_pool_variable = ""
+    }
+}
+
 step "Run Docker RandomQuoutes" {
     properties = {
         Octopus.Action.TargetRoles = "Docker"
