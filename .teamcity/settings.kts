@@ -85,9 +85,10 @@ object Build : BuildType({
                 source = file {
                     path = "RandomQuotes/Dockerfile"
                 }
-                namesAndTags = "docker-local.devops.ow.npres.local/randomquotes:1.0.%build.counter%"
+                namesAndTags = "docker.cloudsmith.io/diligent/randomquotes/randomquotes:%build.number%"
                 commandArgs = "--pull"
             }
+            param("dockerImage.platform", "linux")
         }
         dockerCommand {
             name = "Docker Push"
