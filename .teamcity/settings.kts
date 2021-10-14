@@ -109,7 +109,7 @@ object Build : BuildType({
             param("octopus_space_name", "Spaces-1")
             param("octopus_waitfordeployments", "true")
             param("octopus_version", "3.0+")
-            param("octopus_host", "diligent-test.octopus.app")
+            param("octopus_host", "https://diligent-test.octopus.app")
             param("octopus_project_name", "RandomQuotes")
             param("octopus_deployto", "Development")
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
