@@ -110,10 +110,11 @@ object Build : BuildType({
 
     triggers {
         vcs {
+            triggerRules = """
+                -:.teamcity/**
+                -:.octopus/**
+            """.trimIndent()
             branchFilter = ""
-            perCheckinTriggering = true
-            groupCheckinsByCommitter = true
-            enableQueueOptimization = false
         }
     }
 
