@@ -91,6 +91,7 @@ object Build : BuildType({
             param("dockerImage.platform", "linux")
         }
         dockerCommand {
+            name = "Docker tag latest"
             commandType = other {
                 subCommand = "tag"
                 commandArgs = "randomquotes:latest docker.cloudsmith.io/diligent/randomquotes/random:latest"
