@@ -93,7 +93,7 @@ object Build : BuildType({
         dockerCommand {
             name = "Docker Push"
             commandType = push {
-                namesAndTags = "docker.cloudsmith.io/diligent/randomquotes/randomquotes:latest:1.0.%build.counter%"
+                namesAndTags = "docker.cloudsmith.io/diligent/randomquotes/randomquotes:%build.number%"
             }
         }
         step {
