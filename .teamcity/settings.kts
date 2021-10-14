@@ -120,6 +120,10 @@ object Build : BuildType({
 
     features {
         dockerSupport {
+            cleanupPushedImages = true
+            loginToRegistry = on {
+                dockerRegistryId = "PROJECT_EXT_7"
+            }
         }
     }
 })
