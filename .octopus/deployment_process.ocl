@@ -24,3 +24,20 @@ step "Run Docker RandomQuoutes" {
         }
     }
 }
+
+step "Dokcker ps" {
+    properties = {
+        Octopus.Action.TargetRoles = "Docker"
+    }
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = "docker ps"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "Bash"
+        }
+        worker_pool_variable = ""
+    }
+}
