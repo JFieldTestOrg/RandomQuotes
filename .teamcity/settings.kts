@@ -106,7 +106,6 @@ object Build : BuildType({
         step {
             name = "Create and deploy release"
             type = "octopus.create.release"
-            enabled = false
             param("octopus_space_name", "Spaces-1")
             param("octopus_waitfordeployments", "true")
             param("octopus_version", "3.0+")
