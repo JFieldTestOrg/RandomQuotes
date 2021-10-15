@@ -36,13 +36,6 @@ project {
 
     features {
         dockerRegistry {
-            id = "PROJECT_EXT_11"
-            name = "Docker-Local"
-            url = "http://docker-local.devops.ow.npres.local"
-            userName = "svc-automation"
-            password = "credentialsJSON:abfa4e5f-4057-43e3-aff1-583d81bfcb18"
-        }
-        dockerRegistry {
             id = "PROJECT_EXT_7"
             name = "Cloudsmith Docker"
             url = "https://docker.cloudsmith.io"
