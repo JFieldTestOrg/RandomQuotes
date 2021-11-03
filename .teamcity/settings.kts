@@ -73,6 +73,15 @@ object Build : BuildType({
             name = "DotNet Test"
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
+        dotnetPublish {
+            name = "Dotnet Build"
+            projects = "RandomQuotes.sln"
+            framework = "netcoreapp3.1"
+            configuration = "Release"
+            args = "--self-contained=true"
+            sdk = "3.1"
+            param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
+        }
         dockerCommand {
             name = "Docker Build"
             commandType = build {
@@ -108,15 +117,6 @@ object Build : BuildType({
             param("octopus_deployto", "Test")
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
-        }
-        dotnetPublish {
-            name = "Dotnet Build"
-            projects = "RandomQuotes.sln"
-            framework = "netcoreapp3.1"
-            configuration = "Release"
-            args = "--self-contained=true"
-            sdk = "3.1"
-            param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
     }
 
