@@ -74,11 +74,11 @@ object Build : BuildType({
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
         dotnetPublish {
-            name = "Dotnet Build"
+            name = "Dotnet Publish self contained"
             projects = "RandomQuotes.sln"
             framework = "netcoreapp3.1"
             configuration = "Release"
-            args = "--self-contained=true"
+            args = "--self-contained=true -r win10-x64"
             sdk = "3.1"
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
