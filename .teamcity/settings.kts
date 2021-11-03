@@ -75,7 +75,7 @@ object Build : BuildType({
         }
         dotnetPublish {
             name = "Dotnet Publish self contained"
-            projects = "RandomQuotes.sln"
+            projects = "RandomQuotes/RandomQuotes.csproj"
             framework = "netcoreapp3.1"
             configuration = "Release"
             args = "-r linux-x64 --self-contained=true"
