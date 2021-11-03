@@ -110,7 +110,7 @@ object Build : BuildType({
             param("octopus_releasenumber", "%build.number%")
         }
         dotnetPublish {
-            name = "Build"
+            name = "Dotnet Build"
             projects = "RandomQuotes.sln"
             framework = "netcoreapp3.1"
             configuration = "Release"
