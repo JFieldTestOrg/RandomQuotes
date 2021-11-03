@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.dockerSupport
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetPublish
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetTest
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
@@ -107,6 +108,15 @@ object Build : BuildType({
             param("octopus_deployto", "Test")
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
+        }
+        dotnetPublish {
+            name = "Build"
+            projects = "RandomQuotes.sln"
+            framework = "netcoreapp3.1"
+            configuration = "Release"
+            args = "--self-contained=true"
+            sdk = "3.1"
+            param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
     }
 
