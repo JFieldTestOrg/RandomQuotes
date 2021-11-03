@@ -78,7 +78,8 @@ object Build : BuildType({
             projects = "RandomQuotes.sln"
             framework = "netcoreapp3.1"
             configuration = "Release"
-            args = "--self-contained=true -r win10-x64"
+            runtime = "win10-x64"
+            args = "--self-contained=true"
             sdk = "3.1"
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
