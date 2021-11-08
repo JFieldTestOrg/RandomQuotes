@@ -120,6 +120,15 @@ object Build : BuildType({
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
         }
+        step {
+            name = "Pack dotnet build"
+            type = "octopus.pack.package"
+            param("octopus_packageoutputpath", "/.pkg")
+            param("octopus_packageid", "RandomQuotes")
+            param("octopus_packageversion", "%build.number%")
+            param("octopus_packageformat", "NuPkg")
+            param("octopus_packagesourcepath", "/.pack")
+        }
     }
 
     triggers {
