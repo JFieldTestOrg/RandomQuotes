@@ -78,7 +78,6 @@ object Build : BuildType({
     steps {
         exec {
             name = "GItversion"
-            enabled = false
             path = "gitversion"
             arguments = "/output buildserver /updateassemblyinfo true"
             formatStderrAsError = true
