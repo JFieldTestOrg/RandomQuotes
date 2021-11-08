@@ -136,7 +136,7 @@ object Build : BuildType({
             param("PackageName", "RandomQuotes")
             param("CloudsmithOrganisation", "diligent")
             param("PackageDirectory", ".pkg")
-            param("CloudsmithApiKey", "GUfi*dKN%2XHP@R611Jq")
+            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
             param("PackageVersion", "%build.number%")
         }
         dockerCommand {
