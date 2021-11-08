@@ -97,11 +97,13 @@ object Build : BuildType({
         }
         script {
             name = "Cloudsmith push nuget package"
+            workingDir = ".pkg"
             scriptContent = """
-                pip install --upgrade pip
-                pip install --upgrade cloudsmith-cli
-                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty
+                pip install --upgrade pip 2>&1
+                pip install --upgrade cloudsmith-cli 2>&1
+                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty RandomQuotes.%build.counter%.nupkg
             """.trimIndent()
+            formatStderrAsError = true
             param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
             param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
