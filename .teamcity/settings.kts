@@ -132,11 +132,11 @@ object Build : BuildType({
             type = "CloudsmithPushNuget"
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("CloudsmithRepoName", "randomquotes")
-            param("CloudsmithUserName", "dil-svc-pkg-mgr+writer@diligent.com")
+            param("CloudsmithUserName", "dil-svc-pkg-mgr@diligent.com")
             param("PackageName", "RandomQuotes")
             param("CloudsmithOrganisation", "diligent")
             param("PackageDirectory", ".pkg")
-            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
+            param("CloudsmithApiKey", "GUfi*dKN%2XHP@R611Jq")
             param("PackageVersion", "%build.number%")
         }
         dockerCommand {
