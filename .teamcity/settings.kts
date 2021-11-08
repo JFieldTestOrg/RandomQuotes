@@ -148,6 +148,18 @@ object Build : BuildType({
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
         }
+        step {
+            name = "Cloudsmith push nuget"
+            type = "CloudsmithPushNuget"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("CloudsmithRepoName", "RandomQuotes")
+            param("CloudsmithUserName", "dil-svc-pkg-mgr+writer@diligent.com")
+            param("PackageName", "RandomQuotes")
+            param("CloudsmithOrganisation", "diligent")
+            param("PackageDirectory", ".pkg")
+            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
+            param("PackageVersion", "%build.number%")
+        }
     }
 
     triggers {
