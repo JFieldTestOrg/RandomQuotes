@@ -85,6 +85,24 @@ object Build : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
+        step {
+            type = "MR_GitVersion"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("mr.GitVersion.logFile", "gitversion.log")
+            param("mr.GitVersion.branch", "")
+            param("mr.GitVersion.output", "buildserver")
+            param("mr.GitVersion.updateGitVersion", "false")
+            param("mr.GitVersion.outputFile", "")
+            param("mr.GitVersion.exec", "")
+            param("mr.GitVersion.updateAssemblyInfo", "true")
+            param("mr.GitVersion.url", "")
+            param("mr.GitVersion.projArgs", "")
+            param("mr.GitVersion.password", "credentialsJSON:e4aab887-a0a4-4c5f-a6d1-3cf78d4b8f8c")
+            param("mr.GitVersion.proj", "")
+            param("mr.GitVersion.username", "")
+            param("mr.GitVersion.gitCheckoutDir", "")
+            param("mr.GitVersion.execArgs", "")
+        }
         dotnetTest {
             name = "DotNet Test"
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
@@ -159,24 +177,6 @@ object Build : BuildType({
             param("octopus_deployto", "Test")
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
-        }
-        step {
-            type = "MR_GitVersion"
-            executionMode = BuildStep.ExecutionMode.DEFAULT
-            param("mr.GitVersion.logFile", "gitversion.log")
-            param("mr.GitVersion.branch", "")
-            param("mr.GitVersion.output", "buildserver")
-            param("mr.GitVersion.updateGitVersion", "false")
-            param("mr.GitVersion.outputFile", "")
-            param("mr.GitVersion.exec", "")
-            param("mr.GitVersion.updateAssemblyInfo", "true")
-            param("mr.GitVersion.url", "")
-            param("mr.GitVersion.projArgs", "")
-            param("mr.GitVersion.password", "credentialsJSON:e4aab887-a0a4-4c5f-a6d1-3cf78d4b8f8c")
-            param("mr.GitVersion.proj", "")
-            param("mr.GitVersion.username", "")
-            param("mr.GitVersion.gitCheckoutDir", "")
-            param("mr.GitVersion.execArgs", "")
         }
     }
 
