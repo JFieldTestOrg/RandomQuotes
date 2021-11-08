@@ -113,7 +113,7 @@ object Build : BuildType({
             name = "Cloudsmith push nuget"
             type = "CloudsmithPushNuget"
             executionMode = BuildStep.ExecutionMode.DEFAULT
-            param("CloudsmithRepoName", "RandomQuotes")
+            param("CloudsmithRepoName", "randomquotes")
             param("CloudsmithUserName", "dil-svc-pkg-mgr+writer@diligent.com")
             param("PackageName", "RandomQuotes")
             param("CloudsmithOrganisation", "diligent")
