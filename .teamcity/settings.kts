@@ -87,6 +87,7 @@ object Build : BuildType({
         }
         step {
             type = "MR_GitVersion"
+            enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("mr.GitVersion.logFile", "gitversion.log")
             param("mr.GitVersion.branch", "")
