@@ -84,13 +84,13 @@ object Build : BuildType({
             param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
         }
         step {
-            name = "Pack dotnet build"
+            name = "Octo Pack"
             type = "octopus.pack.package"
-            param("octopus_packageoutputpath", "/.pkg")
+            param("octopus_packageoutputpath", ".pkg")
             param("octopus_packageid", "RandomQuotes")
             param("octopus_packageversion", "%build.number%")
             param("octopus_packageformat", "NuPkg")
-            param("octopus_packagesourcepath", "/.pack")
+            param("octopus_packagesourcepath", ".pack")
         }
         dockerCommand {
             name = "Docker Build"
