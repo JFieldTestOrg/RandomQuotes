@@ -4,7 +4,6 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetPublish
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetTest
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.exec
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
@@ -94,20 +93,6 @@ object Build : BuildType({
             param("octopus_packageversion", "%build.number%")
             param("octopus_packageformat", "NuPkg")
             param("octopus_packagesourcepath", ".pack")
-        }
-        script {
-            name = "Cloudsmith push nuget package"
-            enabled = false
-            workingDir = ".pkg"
-            scriptContent = """
-                pip install --upgrade pip 2>&1
-                pip install --upgrade cloudsmith-cli 2>&1
-                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty RandomQuotes.%build.number%.nupkg
-            """.trimIndent()
-            formatStderrAsError = true
-            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
-            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
-            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
         step {
             name = "Cloudsmith push nuget"
