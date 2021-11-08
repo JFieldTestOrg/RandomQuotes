@@ -152,7 +152,6 @@ object Build : BuildType({
         }
         dockerCommand {
             name = "Docker tag latest"
-            enabled = false
             commandType = other {
                 subCommand = "tag"
                 commandArgs = "docker.cloudsmith.io/diligent/randomquotes/randomquotes:%build.number% docker.cloudsmith.io/diligent/randomquotes/random:latest"
