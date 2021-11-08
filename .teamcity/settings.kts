@@ -58,6 +58,8 @@ object Build : BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+
+        cleanCheckout = true
     }
 
     steps {
