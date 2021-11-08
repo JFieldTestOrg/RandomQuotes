@@ -94,6 +94,7 @@ object Build : BuildType({
         }
         dockerCommand {
             name = "Docker Build"
+            enabled = false
             commandType = build {
                 source = file {
                     path = "RandomQuotes/Dockerfile"
