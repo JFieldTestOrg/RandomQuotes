@@ -40,8 +40,8 @@ project {
             id = "PROJECT_EXT_7"
             name = "Cloudsmith Docker"
             url = "https://docker.cloudsmith.io"
-            userName = "dil-svc-pkg-mgr+writer@diligent.com"
-            password = "credentialsJSON:33cad918-92d5-4c99-8864-1ed076e18cbe"
+            userName = "dil-svc-pkg-mgr@diligent.com"
+            password = "credentialsJSON:3172d371-c214-4c6f-9018-ee1ccf94d7a6"
         }
     }
 
