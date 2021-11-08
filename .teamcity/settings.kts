@@ -101,7 +101,7 @@ object Build : BuildType({
             scriptContent = """
                 pip install --upgrade pip 2>&1
                 pip install --upgrade cloudsmith-cli 2>&1
-                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty RandomQuotes.%build.counter%.nupkg
+                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty RandomQuotes.%build.number%.nupkg
             """.trimIndent()
             formatStderrAsError = true
             param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
