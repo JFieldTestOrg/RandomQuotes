@@ -44,6 +44,20 @@ project {
             password = "credentialsJSON:33cad918-92d5-4c99-8864-1ed076e18cbe"
         }
     }
+
+    cleanup {
+        keepRule {
+            id = "KEEP_RULE_1"
+            keepAtLeast = allBuilds()
+            applyToBuilds {
+                withStatus = successful()
+                withTags = anyOf("released")
+            }
+            dataToKeep = everything()
+            applyPerEachBranch = true
+            preserveArtifactsDependencies = true
+        }
+    }
 }
 
 object Build : BuildType({
