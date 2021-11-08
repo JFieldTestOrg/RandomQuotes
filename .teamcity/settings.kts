@@ -112,6 +112,7 @@ object Build : BuildType({
         }
         dockerCommand {
             name = "Docker Push"
+            enabled = false
             commandType = push {
                 namesAndTags = "docker.cloudsmith.io/diligent/randomquotes/randomquotes:%build.number%"
             }
