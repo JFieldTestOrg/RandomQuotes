@@ -93,6 +93,17 @@ object Build : BuildType({
             param("octopus_packageformat", "NuPkg")
             param("octopus_packagesourcepath", ".pack")
         }
+        script {
+            name = "Cloudsmith push nuget package"
+            scriptContent = """
+                pip install --upgrade pip
+                pip install --upgrade cloudsmith-cli
+                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty
+            """.trimIndent()
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
+        }
         dockerCommand {
             name = "Docker Build"
             enabled = false
@@ -132,17 +143,6 @@ object Build : BuildType({
             param("octopus_deployto", "Test")
             param("secure:octopus_apikey", "credentialsJSON:e31c3b29-edaf-4970-aa62-199d715e20d1")
             param("octopus_releasenumber", "%build.number%")
-        }
-        script {
-            name = "Cloudsmith push nuget package"
-            scriptContent = """
-                pip install --upgrade pip
-                pip install --upgrade cloudsmith-cli
-                cloudsmith push nuget diligent/randomquotes -k %env.CloudsmithApiKey% -F pretty
-            """.trimIndent()
-            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
-            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
-            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
     }
 
