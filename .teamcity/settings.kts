@@ -97,6 +97,7 @@ object Build : BuildType({
         }
         script {
             name = "Cloudsmith push nuget package"
+            enabled = false
             workingDir = ".pkg"
             scriptContent = """
                 pip install --upgrade pip 2>&1
