@@ -1,0 +1,61 @@
+<meta-runner name="Push">
+  <description>testing powershell meta runners</description>
+  <settings>
+    <parameters>
+      <param name="CloudsmithApiKey" value="" />
+      <param name="CloudsmithOrganisation" value="" />
+      <param name="CloudsmithRepoName" value="" />
+      <param name="PackageName" value="" />
+      <param name="PackageVersion" value="" />
+      <param name="TcPassword" value="credentialsJSON:b745351d-74d3-45bd-80ea-95c44666605a" spec="password display='normal'" />
+      <param name="TcUsername" value="npres\SA-OW-TEAMCITY-D1" />
+      <param name="env.CloudsmithApiKey" value="credentialsJSON:0f822e1f-01c5-445e-896d-76d30a904c0d" spec="password display='hidden'" />
+      <param name="env.CloudsmithRepoName" value="%system.teamcity.buildConfName%" spec="text display='hidden' validationMode='any'" />
+      <param name="env.CloudsmithUserName" value="dil-svc-pkg-mgr+writer@diligent.com" />
+      <param name="env.FILESTORESERVER" value="\\LON01R0DFSR01\OWDevOps" />
+      <param name="env.FILESTOREUSER" value="credentialsJSON:7ae897a1-f943-4d46-af42-73529bed5506" spec="password display='normal'" />
+      <param name="env.FILESTOREUSERPASSWORD" value="credentialsJSON:b745351d-74d3-45bd-80ea-95c44666605a" spec="password display='normal'" />
+      <param name="env.GitHubUser" value="diligent-svcteamcity" />
+      <param name="env.GitHubUserToken" value="credentialsJSON:f6d8cb01-5aea-442c-91a7-28ede06bfbcb" spec="password display='normal'" />
+      <param name="env.OctoServer" value="%env.TcOctoServer%" />
+      <param name="env.TcDockerPassword" value="%env.TcNugetPassword%" />
+      <param name="env.TcDockerUsername" value="%env.TcNugetUserName%" />
+      <param name="env.TcEportalApiKey" value="credentialsJSON:71df4fbd-fa2f-4a76-9035-21a265cbba02" spec="password display='normal'" />
+      <param name="env.TcNugetApiKey" value="credentialsJSON:d47f77fd-87d5-452e-a0ba-9f63fda87fda" spec="password display='normal'" />
+      <param name="env.TcNugetPassword" value="credentialsJSON:abfa4e5f-4057-43e3-aff1-583d81bfcb18" spec="password display='normal'" />
+      <param name="env.TcNugetSource" value="https://devops.ow.npres.local/artifactory/api/nuget/nuget" />
+      <param name="env.TcNugetUserName" value="svc-automation" />
+      <param name="env.TcOctoApiKey" value="credentialsJSON:ebf43188-0e85-451a-aefe-1e2c020a09a6" spec="password display='normal'" />
+      <param name="env.TcOctoIpAddress" value="10.73.190.51" />
+      <param name="env.TcOctoServer" value="https://octopus.corp.diligent.com" />
+      <param name="env.TcOctoThumbprint" value="credentialsJSON:7ce649d4-1c26-4587-8073-4d83bce6e760" spec="password display='normal'" />
+      <param name="env.octoApiKey" value="%env.TcOctoApiKey%" />
+      <param name="teamcity.git.fetchAllHeads" value="true" />
+    </parameters>
+    <build-runners>
+      <runner name="Push" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_errorToError" value="true" />
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_minVersion" value="7" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[pip install --upgrade pip 2>&1
+pip install --upgrade cloudsmith-cli 2>&1
+$version = ((cloudsmith list packages %CloudsmithOrganisation%/%CloudsmithRepoName% -F pretty_json | convertfrom-json).data | ? Name -eq '%PackageName%').version
+If ($version -eq $PackageVersion) {
+	"Package Name and Version already exist, no need to push"
+} else {
+	Write-Host "Executing cloudsmith command : cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg"
+	cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource" value="Job configuration" />
+          <param name="org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource" value="Job configuration" />
+          <param name="org.jfrog.artifactory.selectedDeployableServer.useSpecs" value="false" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <requirements />
+  </settings>
+</meta-runner>
