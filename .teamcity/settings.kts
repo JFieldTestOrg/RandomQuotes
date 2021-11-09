@@ -4,6 +4,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetPublish
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetTest
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.exec
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.powerShell
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
@@ -201,4 +202,28 @@ object Build : BuildType({
 
 object Push : BuildType({
     name = "Push"
+
+    steps {
+        powerShell {
+            name = "Push"
+            minRequiredVersion = "7"
+            formatStderrAsError = true
+            scriptMode = script {
+                content = """
+                    pip install --upgrade pip 2>&1
+                    pip install --upgrade cloudsmith-cli 2>&1
+                    ${'$'}version = ((cloudsmith list packages %CloudsmithOrganisation%/%CloudsmithRepoName% -F pretty_json | convertfrom-json).data | ? Name -eq '%PackageName%').version
+                    If (${'$'}version -eq ${'$'}PackageVersion) {
+                    	"Package Name and Version already exist, no need to push"
+                    } else {
+                    	Write-Host "Executing cloudsmith command : cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg"
+                    	cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg
+                    }
+                """.trimIndent()
+            }
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
+        }
+    }
 })
