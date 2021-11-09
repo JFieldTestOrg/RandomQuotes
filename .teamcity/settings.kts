@@ -34,6 +34,7 @@ version = "2021.2"
 project {
 
     buildType(Build)
+    buildType(Push)
 
     features {
         dockerRegistry {
@@ -196,4 +197,8 @@ object Build : BuildType({
             }
         }
     }
+})
+
+object Push : BuildType({
+    name = "Push"
 })
