@@ -235,4 +235,18 @@ object Test : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        step {
+            type = "RandomQuotes_CloudsmithTagPackage"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("PackageNames", "")
+            param("PackageVersions", "")
+            param("CloudsmithRepoName", "")
+            param("PackageTag", "Released")
+            param("CloudsmithOrganisation", "diligent")
+            param("CloudsmithApiKey", "")
+            param("PackageFormats", "")
+        }
+    }
 })
