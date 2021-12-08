@@ -35,6 +35,7 @@ version = "2021.2"
 project {
 
     buildType(Build)
+    buildType(Test)
     buildType(Push)
 
     features {
@@ -226,4 +227,8 @@ object Push : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
     }
+})
+
+object Test : BuildType({
+    name = "test"
 })
