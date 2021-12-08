@@ -8,9 +8,9 @@
       <param name="CloudsmithOrganisation" value="diligent" />
       <param name="CloudsmithUserName" value="dil-svc-pkg-mgr+writer@diligent.com" />
       <param name="PackageTag" value="Released" />
-      <param name="PackageNames" spec="text description='Comma-separated list of package names' display='normal'"/>
-      <param name="PackageVersions" />
-      <param name="PackageFormats" />
+      <param name="PackageNames" spec="text description='Ordered, comma-separated list of package names' display='normal'" />
+      <param name="PackageVersions" spec="text description='Ordered, comma-separated list of package versions' display='normal'" />
+      <param name="PackageFormats" spec="text description='Ordered, comma-separated list of package formats' display='normal'"/>
     </parameters>
     <build-runners>
       <runner name="" type="jetbrains_powershell">
