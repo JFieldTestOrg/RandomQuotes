@@ -232,6 +232,10 @@ object Push : BuildType({
 object Test : BuildType({
     name = "CloudSmith Push Tag Test"
 
+    params {
+        param("env.CloudsmithApiKey", "credentialsJSON:26421b48-39c2-428e-803b-6c179d454347")
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
