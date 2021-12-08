@@ -235,4 +235,58 @@ object Test : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        powerShell {
+            scriptMode = script {
+                content = """
+                    ${'$'}apiKey = %env.CloudsmithApiKey%
+                    ${'$'}repo = %env.CloudsmithRepoName%
+                    ${'$'}packageNames = %PackageNames%
+                    ${'$'}packageVersions = %PackageVersions%
+                    ${'$'}packageFormats = %PackageFormats%
+                    ${'$'}packageTag = %PackageTag%
+                    
+                    [Net.ServicePointManager]::SecurityProtocol = "Tls12, Ssl3"
+                    
+                    ${'$'}Headers = @{
+                    	'X-APi-Key' = ${'$'}apiKey
+                    	'Accept'     = '*/*'
+                    }
+                    ${'$'}packageIndex = 0
+                    
+                    foreach (${'$'}packageName in ${'$'}packageNames.Split(",")) {
+                        ${'$'}packageVersion = ${'$'}packageVersions.Split(",")[${'$'}packageIndex]
+                        ${'$'}packageFormat = ${'$'}packageFormats.Split(",")[${'$'}packageIndex]
+                    
+                        ${'$'}query = "?query=name:${'$'}packageName AND version:${'$'}packageVersion AND format:${'$'}packageFormat"
+                        ${'$'}packagesUrl = "https://api.cloudsmith.io/v1/packages/diligent/${'$'}repo"
+                        ${'$'}search = "${'$'}PackagesUrl/${'$'}query"
+                    
+                        ${'$'}pkg = invoke-restmethod -method GET -Uri ${'$'}search -header ${'$'}headers
+                        ${'$'}id = ${'$'}pkg.identifier_perm
+                    
+                        ${'$'}headers.Set_Item('Content-Type','application/json')
+                    
+                        ${'$'}tagSpec = @{
+                            tags         = @("${'$'}packageTag")
+                            action       = 'add'
+                            is_immutable = ${'$'}true
+                        } | convertto-json -depth 5
+                    
+                    
+                        ${'$'}tagUrl = " https://api.cloudsmith.io/v1/packages/diligent/${'$'}repo/${'$'}id/tag/"
+                        Write-Host "Writing tag for package ${'$'}repo/${'$'}(${'$'}packageName)-${'$'}(${'$'}packageversion)"
+                        Write-Host "Tag Url:  ${'$'}tagUrl"
+                    
+                        invoke-restmethod -method POST -uri ${'$'}tagurl -body ${'$'}tagSpec -header ${'$'}headers
+                        ${'$'}packageIndex++
+                    }
+                """.trimIndent()
+            }
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
+        }
+    }
 })
