@@ -8,7 +8,7 @@
       <param name="CloudsmithOrganisation" value="diligent" />
       <param name="CloudsmithUserName" value="dil-svc-pkg-mgr+writer@diligent.com" />
       <param name="PackageTag" value="Released" />
-      <param name="PackageNames" />
+      <param name="PackageNames" spec="Comma separated list of package names"/>
       <param name="PackageVersions" />
       <param name="PackageFormats" />
     </parameters>
