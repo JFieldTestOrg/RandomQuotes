@@ -3,8 +3,7 @@
   <settings>
     <parameters>
       <param name="CloudsmithApiKey" spec="text description='API Key. The CloudSmith account needs to have Admin privilege on the target CloudSmith repository or the operation fails with a no permission error!' display='normal'" />
-      <param name="CloudsmithRepoName" />
-      <param name="CloudsmithUserName" />
+      <param name="CloudsmithRepoName" />     
       <param name="CloudsmithOrganisation" value="diligent" />
       <param name="PackageTag" value="Released" />
       <param name="PackageNames" spec="text description='Ordered, comma-separated list of package names.' display='normal'" />
