@@ -230,7 +230,7 @@ object Push : BuildType({
 })
 
 object Test : BuildType({
-    name = "danielTest"
+    name = "CloudSmith Push Tag Test"
 
     vcs {
         root(DslContext.settingsRoot)
