@@ -5,7 +5,9 @@
       <param name="CloudsmithApiKey" />
       <param name="CloudsmithRepoName" />
       <param name="CloudsmithUserName" />
-      <param name="PackageTag" />
+      <param name="CloudsmithOrganisation" value="diligent" />
+      <param name="CloudsmithUserName" value="dil-svc-pkg-mgr+writer@diligent.com" />
+      <param name="PackageTag" value="Released" />
       <param name="PackageNames" />
       <param name="PackageVersions" />
       <param name="PackageFormats" />
@@ -54,7 +56,7 @@ foreach ($packageName in $packageNames.Split(",")) {
     Write-Host "Writing tag for package $repo/$($packageName)-$($packageversion)"
     Write-Host "Tag Url:  $tagUrl"
 
-    invoke-restmethod -method POST -uri $tagurl -body $tagSpec -header $headers
+    Invoke-RestMethod -method POST -uri $tagurl -body $tagSpec -header $headers
     $packageIndex++
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
