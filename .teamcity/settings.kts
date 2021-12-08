@@ -231,4 +231,8 @@ object Push : BuildType({
 
 object Test : BuildType({
     name = "test"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
