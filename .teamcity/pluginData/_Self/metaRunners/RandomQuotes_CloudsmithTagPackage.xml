@@ -2,11 +2,11 @@
   <description>Cloudsmith Tag Package test</description>
   <settings>
     <parameters>
+      <param name="CloudsmithUserName" spec="text description='Unused, only for keeping track of the CloudsmithApiKey account." />
       <param name="CloudsmithApiKey" spec="text description='API Key. The CloudSmith account needs to have Admin privilege on the target CloudSmith repository or the operation fails with a no permission error!' display='normal'" />
       <param name="CloudsmithRepoName" />
       <param name="CloudsmithUserName" />
       <param name="CloudsmithOrganisation" value="diligent" />
-      <param name="CloudsmithUserName" value="dil-svc-pkg-mgr+writer@diligent.com" />
       <param name="PackageTag" value="Released" />
       <param name="PackageNames" spec="text description='Ordered, comma-separated list of package names.' display='normal'" />
       <param name="PackageVersions" spec="text description='Ordered, comma-separated list of package versions.' display='normal'" />
