@@ -244,17 +244,6 @@ object Test : BuildType({
         step {
             type = "RandomQuotes_CloudsmithTagPackage"
             executionMode = BuildStep.ExecutionMode.DEFAULT
-            param("PackageNames", "")
-            param("PackageVersions", "")
-            param("CloudsmithRepoName", "")
-            param("PackageTag", "Released")
-            param("CloudsmithOrganisation", "diligent")
-            param("CloudsmithApiKey", "")
-            param("PackageFormats", "")
-        }
-        step {
-            type = "RandomQuotes_CloudsmithTagPackage"
-            executionMode = BuildStep.ExecutionMode.DEFAULT
             param("PackageNames", "Entities.Web.Files,Entities-Oneworld,AdminPortal")
             param("PackageVersions", "21.6.0-spe-469-0001,21.6.0-spe-469-0001,21.6.0-spe-469-0001")
             param("CloudsmithRepoName", "sre-dev-core")
