@@ -17,9 +17,9 @@
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[$apiKey = %env.CloudsmithApiKey%
 $repo = %env.CloudsmithRepoName%
-$packageNames = %PackageNames%
-$packageVersions = %PackageVersions%
-$packageFormats = %PackageFormats%
+$packageNames = "%PackageNames%"
+$packageVersions = "%PackageVersions%"
+$packageFormats = "%PackageFormats%"
 $packageTag = %PackageTag%
 
 [Net.ServicePointManager]::SecurityProtocol = "Tls12, Ssl3"
