@@ -8,7 +8,7 @@
       <param name="PackageTag" value="Released" />
       <param name="PackageNames" spec="text description='Ordered, comma-separated list of package names.' display='normal'" />
       <param name="PackageVersions" spec="text description='Ordered, comma-separated list of package versions.' display='normal'" />
-      <param name="PackageFormats" spec="text description='Ordered, comma-separated list of package formats.' display='normal'"/>
+      <param name="PackageFormat" spec="text description='Package format (E.g. nuget)' display='normal'"/>
     </parameters>
     <build-runners>
       <runner name="" type="jetbrains_powershell">
@@ -21,7 +21,7 @@ write-host "%CloudsmithRepoName%"
 $repo = "%CloudsmithRepoName%"
 $packageNames = "%PackageNames%"
 $packageVersions = "%PackageVersions%"
-$packageFormats = "%PackageFormats%"
+$packageFormat = "%PackageFormat%"
 $packageTag = "%PackageTag%"
 
 [Net.ServicePointManager]::SecurityProtocol = "Tls12"
@@ -34,8 +34,7 @@ $packageIndex = 0
 
 foreach ($packageName in $packageNames.Split(",")) {
     $packageVersion = $packageVersions.Split(",")[$packageIndex]
-    $packageFormat = $packageFormats.Split(",")[$packageIndex]
-
+  
     $query = "?query=name:$packageName AND version:$packageVersion AND format:$packageFormat"
     $packagesUrl = "https://api.cloudsmith.io/v1/packages/diligent/$repo"
     $search = "$PackagesUrl/$query"
