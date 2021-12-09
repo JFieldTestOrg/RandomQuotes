@@ -239,18 +239,4 @@ object Test : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
-
-    steps {
-        step {
-            type = "RandomQuotes_CloudsmithTagPackage"
-            executionMode = BuildStep.ExecutionMode.DEFAULT
-            param("PackageNames", "Entities.Web.Files,Entities-Oneworld")
-            param("PackageVersions", "21.6.0-spe-469-0001,21.6.0-spe-469-0001")
-            param("CloudsmithRepoName", "sre-dev-core")
-            param("PackageTag", "pineapple")
-            param("CloudsmithOrganisation", "diligent")
-            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
-            param("PackageFormat", "nuget")
-        }
-    }
 })
