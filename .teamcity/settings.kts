@@ -247,7 +247,7 @@ object Test : BuildType({
             param("PackageNames", "Entities.Web.Files")
             param("PackageVersions", "21.6.0-spe-469-0001")
             param("CloudsmithRepoName", "sre-dev-core")
-            param("PackageTag", "raspberry")
+            param("PackageTag", "coconut")
             param("CloudsmithOrganisation", "diligent")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
             param("PackageFormats", "nuget")
