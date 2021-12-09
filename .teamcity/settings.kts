@@ -256,8 +256,8 @@ object Test : BuildType({
                         pip install --upgrade cloudsmith-cli 2>&1 | out-null
                     }
                     
-                    ${'$'}PackageNameList = "apple"
-                    ${'$'}PackageVersionList = "1,2"
+                    ${'$'}packageVersions = "apple"
+                    ${'$'}PackageNames = "1,2"
                     
                     ${'$'}PackageVersionList = ${'$'}packageVersions.Split(",")
                     ${'$'}PackageNameList = ${'$'}PackageNames.Split(",")
