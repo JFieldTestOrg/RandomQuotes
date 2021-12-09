@@ -16,7 +16,8 @@
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[$apiKey = %env.CloudsmithApiKey%
-$repo = %env.CloudsmithRepoName%
+write-host %CloudsmithRepoName%
+$repo = %CloudsmithRepoName%
 $packageNames = "%PackageNames%"
 $packageVersions = "%PackageVersions%"
 $packageFormats = "%PackageFormats%"
