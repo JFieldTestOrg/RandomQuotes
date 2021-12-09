@@ -37,7 +37,7 @@ foreach ($packageName in $packageNames.Split(",")) {
 
     $query = "?query=name:$packageName AND version:$packageVersion AND format:$packageFormat"
     $packagesUrl = "https://api.cloudsmith.io/v1/packages/diligent/$repo"
-    $search = "$PackagesUrl/$query"
+    [string]$search = "$PackagesUrl/$query"
 
     Write-Host "Querying package info for $search"
     $pkg = invoke-restmethod -method GET -Uri $search -header $headers
