@@ -246,7 +246,7 @@ object Test : BuildType({
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("PackageNames", "Entities.Web.Files,Entities-Oneworld")
             param("PackageVersions", "21.6.0-spe-469-0001,21.6.0-spe-469-0001")
-            param("CloudsmithRepoName", "sre-dev-core,")
+            param("CloudsmithRepoName", "sre-dev-core")
             param("PackageTag", "peach")
             param("CloudsmithOrganisation", "diligent")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
