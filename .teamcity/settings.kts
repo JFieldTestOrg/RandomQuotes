@@ -242,6 +242,7 @@ object Test : BuildType({
 
     steps {
         powerShell {
+            enabled = false
             scriptMode = script {
                 content = """
                     try {
