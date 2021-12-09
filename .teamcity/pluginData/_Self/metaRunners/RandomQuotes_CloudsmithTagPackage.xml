@@ -18,11 +18,11 @@
           <param name="jetbrains_powershell_script_code"><![CDATA[
 
 write-host "%CloudsmithRepoName%"
-$repo = %CloudsmithRepoName%
+$repo = "%CloudsmithRepoName%"
 $packageNames = "%PackageNames%"
 $packageVersions = "%PackageVersions%"
 $packageFormats = "%PackageFormats%"
-$packageTag = %PackageTag%
+$packageTag = "%PackageTag%"
 
 [Net.ServicePointManager]::SecurityProtocol = "Tls12, Ssl3"
 
