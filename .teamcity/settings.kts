@@ -244,7 +244,7 @@ object Test : BuildType({
         powerShell {
             scriptMode = script {
                 content = """
-                    if (-not(get-command python)){throw "Python needs to be installed on the build agent, cannot continue!"}
+                    if (-not(get-command blabla)){throw "Python needs to be installed on the build agent, cannot continue!"}
                     pip install --upgrade pip 2>&1 | out-null
                     pip install --upgrade cloudsmith-cli 2>&1 | out-null
                     
