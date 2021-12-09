@@ -49,7 +49,7 @@ foreach ($packageName in $packageNames.Split(",")) {
     $tagSpec = @{
         tags         = @("$packageTag")
         action       = 'add'
-        is_immutable = $true
+        is_immutable = "%Immutable%"
     } | convertto-json -depth 5
 
 
