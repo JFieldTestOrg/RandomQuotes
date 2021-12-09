@@ -250,7 +250,7 @@ object Test : BuildType({
             param("PackageTag", "peach")
             param("CloudsmithOrganisation", "diligent")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
-            param("PackageFormats", "nuget")
+            param("PackageFormat", "nuget")
         }
     }
 })
