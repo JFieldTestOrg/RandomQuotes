@@ -256,16 +256,6 @@ object Test : BuildType({
                     }
                     
                     exit 0
-                    
-                    if (-not(get-command python)){throw "Python needs to be installed on the build agent, cannot continue!"}
-                    ${'$'}version = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json %CloudsmithOrganisation%/%CloudsmithRepoName% | convertfrom-json).data | ? Name -eq "%PackageName%").version
-                    Write-Host "Package Name %PackageName% Version detected = ${'$'}version Version to upload = %PackageVersion%"
-                    If (${'$'}version -match "%PackageVersion%") {
-                    	"Package Name and Version already exist, no need to push"
-                    } else {
-                    	Write-Host "Executing cloudsmith command : cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg"
-                    	cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg
-                    }
                 """.trimIndent()
             }
             param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
