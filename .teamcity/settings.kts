@@ -244,10 +244,20 @@ object Test : BuildType({
         powerShell {
             scriptMode = script {
                 content = """
-                    if (-not(get-command blabla)){throw "Python needs to be installed on the build agent, cannot continue!"}
-                    pip install --upgrade pip 2>&1 | out-null
-                    pip install --upgrade cloudsmith-cli 2>&1 | out-null
+                    try {
+                        if (-not(get-command python)) {
+                            throw "Python needs to be installed on the build agent, cannot continue!"
+                        }
+                    }
+                    catch {
+                        Write-Host Installing pip...
+                        pip install --upgrade pip 2>&1 | out-null
+                        Write-Host Installing cloudsmith-cli...
+                        pip install --upgrade cloudsmith-cli 2>&1 | out-null
+                    }
                     
+                    ${'$'}PackageNameList = "apple"
+                    ${'$'}PackageVersionList = "1,2"
                     
                     ${'$'}PackageVersionList = ${'$'}packageVersions.Split(",")
                     ${'$'}PackageNameList = ${'$'}PackageNames.Split(",")
@@ -257,6 +267,17 @@ object Test : BuildType({
                     }
                     
                     exit 0
+                    
+                    if (-not(get-command python)) { throw "Python needs to be installed on the build agent, cannot continue!" }
+                    ${'$'}version = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json %CloudsmithOrganisation%/%CloudsmithRepoName% | convertfrom-json).data | ? Name -eq "%PackageName%").version
+                    Write-Host "Package Name %PackageName% Version detected = ${'$'}version Version to upload = %PackageVersion%"
+                    If (${'$'}version -match "%PackageVersion%") {
+                        "Package Name and Version already exist, no need to push"
+                    }
+                    else {
+                        Write-Host "Executing cloudsmith command : cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg"
+                        cloudsmith push nuget -k %CloudsmithApiKey% -F pretty %CloudsmithOrganisation%/%CloudsmithRepoName% %PackageName%.%PackageVersion%.nupkg
+                    }
                 """.trimIndent()
             }
             param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
