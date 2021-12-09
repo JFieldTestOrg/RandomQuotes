@@ -27,7 +27,7 @@ $packageTag = "%PackageTag%"
 [Net.ServicePointManager]::SecurityProtocol = "Tls12, Ssl3"
 
 $Headers = @{
-	'X-APi-Key' = %CloudsmithApiKey%
+	'X-APi-Key' = "%CloudsmithApiKey%"
 	'Accept'     = '*/*'
 }
 $packageIndex = 0
