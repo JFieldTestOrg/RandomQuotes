@@ -278,7 +278,7 @@ object Test : BuildType({
             type = "CloudsmithPushNuget"
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("PackageNames", "LicencePortal,Entities.Web.Files")
-            param("PackageVersions", "21.6.0-spe-469-0001,21.6.0-spe-469-0001")
+            param("PackageVersions", "21.6.0-spe-469-0001,21.6.0-spe-469-0001, 21.6.0-spe-469-0001")
             param("CloudsmithRepoName", "sre-dev-core")
             param("CloudsmithUserName", "dil-svc-pkg-mgr+writer@diligent.com")
             param("CloudsmithOrganisation", "diligent")
