@@ -276,6 +276,7 @@ object Test : BuildType({
         }
         step {
             type = "CloudsmithPushNuget"
+            enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("PackageNames", "LicencePortal,Entities.Web.Files")
             param("PackageVersions", "21.6.0-spe-469-0002,21.6.0-spe-469-0001")
