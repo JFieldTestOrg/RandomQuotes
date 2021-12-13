@@ -286,5 +286,11 @@ object Test : BuildType({
             param("PackageDirectory", ".pkg")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
         }
+        step {
+            type = "DownloadCodeSigningCert"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("OctoCertProviderApiKey", "%env.OctoCertProviderApiKey%")
+            param("CertificateTargetPath", "%env.CertificateTargetPath%")
+        }
     }
 })
