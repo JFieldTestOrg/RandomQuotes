@@ -290,7 +290,7 @@ object Test : BuildType({
             type = "DownloadCodeSigningCert"
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("OctoCertProviderApiKey", "%env.OctoCertProviderApiKey%")
-            param("CertificateTargetPath", "%system.teamcity.build.workingDir%")
+            param("CertificateTargetPath", "%system.teamcity.build.workingDir%/CoActWin")
         }
     }
 })
