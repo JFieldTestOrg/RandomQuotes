@@ -282,7 +282,7 @@ object Test : BuildType({
             executionMode = BuildStep.ExecutionMode.DEFAULT
 
             conditions {
-                matches("GitVersion.BranchName", """^master|^feature|^tags\/""")
+                matches("GitVersion.BranchName", """^master|^feature\/.*|^tags\/.*""")
             }
             param("PackageNames", "AdminPortal,LicencePortal,Entities-Oneworld")
             param("CloudsmithRepoName", "entities")
