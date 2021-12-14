@@ -279,12 +279,16 @@ object Test : BuildType({
             type = "CloudsmithPushNuget"
             enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
+
+            conditions {
+                matches("GitVersion.BranchName", """^master|^feature|^tags\/""")
+            }
             param("PackageNames", "AdminPortal,LicencePortal,Entities-Oneworld")
-            param("PackageVersions", "%GitVersion.FullSemVer%")
             param("CloudsmithRepoName", "entities")
             param("CloudsmithOrganisation", "diligent")
             param("PackageDirectory", ".pkg")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
+            param("PackageVersion", "%env.GitVersion.FullSemVer%")
         }
         step {
             type = "DownloadCodeSigningCert"
