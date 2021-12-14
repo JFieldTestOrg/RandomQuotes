@@ -234,6 +234,7 @@ object Test : BuildType({
 
     params {
         param("env.CloudsmithApiKey", "credentialsJSON:26421b48-39c2-428e-803b-6c179d454347")
+        param("GitVersion.FullSemVer", "%GitVersion.FullSemVer%")
     }
 
     vcs {
@@ -278,16 +279,16 @@ object Test : BuildType({
             type = "CloudsmithPushNuget"
             enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
-            param("PackageNames", "LicencePortal,Entities.Web.Files")
-            param("PackageVersions", "21.6.0-spe-469-0002,21.6.0-spe-469-0001")
-            param("CloudsmithRepoName", "sre-dev-core")
-            param("CloudsmithUserName", "dil-svc-pkg-mgr+writer@diligent.com")
+            param("PackageNames", "AdminPortal,LicencePortal,Entities-Oneworld")
+            param("PackageVersions", "%GitVersion.FullSemVer%")
+            param("CloudsmithRepoName", "entities")
             param("CloudsmithOrganisation", "diligent")
             param("PackageDirectory", ".pkg")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
         }
         step {
             type = "DownloadCodeSigningCert"
+            enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("OctoCertProviderApiKey", "%env.OctoCertProviderApiKey%")
             param("CertificateTargetPath", "%system.teamcity.build.workingDir%/CoActWin")
