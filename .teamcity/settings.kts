@@ -235,6 +235,7 @@ object Test : BuildType({
     params {
         param("env.CloudsmithApiKey", "credentialsJSON:26421b48-39c2-428e-803b-6c179d454347")
         param("GitVersion.FullSemVer", "%GitVersion.FullSemVer%")
+        param("GitVersion.BranchName", "feature/OW-11927")
     }
 
     vcs {
