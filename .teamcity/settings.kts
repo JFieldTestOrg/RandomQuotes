@@ -299,5 +299,17 @@ object Test : BuildType({
             param("OctoCertProviderApiKey", "%env.OctoCertProviderApiKey%")
             param("CertificateTargetPath", "%system.teamcity.build.workingDir%/CoActWin")
         }
+        step {
+            type = "CloudSmithTagPackage"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("Immutable", "true")
+            param("PackageNames", "")
+            param("PackageVersions", "")
+            param("CloudsmithRepoName", "")
+            param("PackageTag", "Released")
+            param("CloudsmithOrganisation", "diligent")
+            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
+            param("PackageFormat", "")
+        }
     }
 })
