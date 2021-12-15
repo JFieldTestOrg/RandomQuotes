@@ -302,14 +302,18 @@ object Test : BuildType({
         step {
             type = "CloudSmithTagPackage"
             executionMode = BuildStep.ExecutionMode.DEFAULT
+
+            conditions {
+                matches("teamcity.build.branch", "tags/.*")
+            }
             param("Immutable", "true")
-            param("PackageNames", "")
-            param("PackageVersions", "")
-            param("CloudsmithRepoName", "")
-            param("PackageTag", "Released")
+            param("PackageNames", "LicencePortal")
+            param("PackageVersions", "22.1.0-SPE-634.53")
+            param("CloudsmithRepoName", "entities")
+            param("PackageTag", "rc")
             param("CloudsmithOrganisation", "diligent")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
-            param("PackageFormat", "")
+            param("PackageFormat", "nuget")
         }
     }
 })
