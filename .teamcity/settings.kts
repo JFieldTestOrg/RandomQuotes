@@ -302,6 +302,7 @@ object Test : BuildType({
         }
         step {
             type = "CloudSmithTagPackage"
+            enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
 
             conditions {
