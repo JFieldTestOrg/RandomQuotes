@@ -317,5 +317,14 @@ object Test : BuildType({
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
             param("PackageFormat", "nuget")
         }
+        step {
+            type = "DownloadCertificateFromOctopus"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("OctoCertProviderApiKey", "%env.OctoCertProviderApiKey%")
+            param("CertificateTargetPath", "%system.teamcity.build.workingDir%")
+            param("CertfileFileName", "certificate.pfx")
+            param("OctoCertID", "Certificates-201")
+            param("OctoSpaceID", "Spaces-1")
+        }
     }
 })
