@@ -231,6 +231,7 @@ object Push : BuildType({
 
 object Test : BuildType({
     name = "TestJob"
+    description = "Feel free to change this job if you need to test something"
 
     params {
         param("env.CloudsmithApiKey", "credentialsJSON:26421b48-39c2-428e-803b-6c179d454347")
