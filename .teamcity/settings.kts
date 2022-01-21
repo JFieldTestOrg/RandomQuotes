@@ -340,5 +340,18 @@ object Test : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
+        powerShell {
+            name = "cloudsmith pkg version test (1)"
+            scriptMode = script {
+                content = """
+                    ${'$'}errors = ''
+                    ${'$'}version = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json diligent/entities | convertfrom-json).data | ? Name -eq 'AdminPortal').version 2> ${'$'}errors
+                    Write-Host "Package Name 'AdminPortal' ; Version(s) detected = ${'$'}version"
+                """.trimIndent()
+            }
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
+        }
     }
 })
