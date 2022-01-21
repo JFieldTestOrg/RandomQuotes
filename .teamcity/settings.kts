@@ -280,7 +280,6 @@ object Test : BuildType({
         }
         step {
             type = "CloudsmithPushNuget"
-            enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
 
             conditions {
