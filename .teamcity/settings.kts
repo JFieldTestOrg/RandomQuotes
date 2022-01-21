@@ -329,12 +329,12 @@ object Test : BuildType({
             param("OctoSpaceID", "Spaces-1")
         }
         powerShell {
-            name = "cloudsmith pkg version test (1) (1)"
+            name = "cloudsmith pkg version test"
             scriptMode = script {
                 content = """
                     ${'$'}errors = ''
                     #${'$'}cmd = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json diligent/entities | convertfrom-json).data | ? Name -eq 'AdminPortal').version
-                    ${'$'}version = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json diligent/entities | convertfrom-json).data | ? Name -eq 'AdminPortal').version 2> ${'$'}errors
+                    ${'$'}version = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json diligent/entitiesas | convertfrom-json).data | ? Name -eq 'AdminPortal').version 2> ${'$'}errors
                     Write-Host "Package Name 'AdminPortal' ; Version(s) detected = ${'$'}version"
                     Write-Host "errors: ${'$'}errors"
                 """.trimIndent()
