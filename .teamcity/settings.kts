@@ -326,5 +326,17 @@ object Test : BuildType({
             param("OctoCertID", "Certificates-201")
             param("OctoSpaceID", "Spaces-1")
         }
+        powerShell {
+            name = "cloudsmith pkg version test"
+            scriptMode = script {
+                content = """
+                    ${'$'}version = ((cloudsmith list packages -k %CloudsmithApiKey% -F pretty_json diligent/entities | convertfrom-json).data | ? Name -eq 'AdminPortal').version
+                    Write-Host "Package Name 'AdminPortal' ; Version(s) detected = ${'$'}version"
+                """.trimIndent()
+            }
+            param("org.jfrog.artifactory.selectedDeployableServer.downloadSpecSource", "Job configuration")
+            param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
+            param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
+        }
     }
 })
