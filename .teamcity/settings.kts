@@ -319,6 +319,7 @@ object Test : BuildType({
         }
         step {
             type = "DownloadCertificateFromOctopus"
+            enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("OctoCertProviderApiKey", "%env.OctoCertProviderApiKey%")
             param("CertificateTargetPath", "%system.teamcity.build.workingDir%")
