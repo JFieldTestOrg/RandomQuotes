@@ -280,21 +280,6 @@ object Test : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
         step {
-            type = "CloudsmithPushNuget"
-            enabled = false
-            executionMode = BuildStep.ExecutionMode.DEFAULT
-
-            conditions {
-                matches("GitVersion.BranchName", """^master|^feature\/.*|^tags\/.*""")
-            }
-            param("PackageNames", "AdminPortal,LicencePortal,Entities-Oneworld")
-            param("CloudsmithRepoName", "entities")
-            param("CloudsmithOrganisation", "diligent")
-            param("PackageDirectory", ".pkg")
-            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
-            param("PackageVersion", "%env.GitVersion.FullSemVer%")
-        }
-        step {
             type = "DownloadCodeSigningCert"
             enabled = false
             executionMode = BuildStep.ExecutionMode.DEFAULT
