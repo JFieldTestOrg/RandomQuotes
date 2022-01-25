@@ -142,17 +142,6 @@ object Build : BuildType({
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
             param("PackageVersion", "%build.number%")
         }
-        step {
-            name = "Cloudsmith push nuget old"
-            type = "CloudsmithPushNuget"
-            executionMode = BuildStep.ExecutionMode.DEFAULT
-            param("PackageNames", "")
-            param("CloudsmithRepoName", "randomquotes")
-            param("CloudsmithOrganisation", "diligent")
-            param("PackageDirectory", ".pkg")
-            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
-            param("PackageVersion", "%build.number%")
-        }
         dockerCommand {
             name = "Docker Build"
             commandType = build {
