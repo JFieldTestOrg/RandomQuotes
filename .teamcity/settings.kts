@@ -131,12 +131,11 @@ object Build : BuildType({
             param("octopus_packagesourcepath", ".pack")
         }
         step {
-            name = "Cloudsmith push nuget"
+            name = "Cloudsmith push nuget old"
             type = "CloudsmithPushNuget"
             executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("PackageNames", "")
             param("CloudsmithRepoName", "randomquotes")
-            param("CloudsmithUserName", "dil-svc-pkg-mgr@diligent.com")
-            param("PackageName", "RandomQuotes")
             param("CloudsmithOrganisation", "diligent")
             param("PackageDirectory", ".pkg")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
