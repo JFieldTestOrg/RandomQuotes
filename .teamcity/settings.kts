@@ -336,7 +336,7 @@ object Test : BuildType({
             param("PackageNames", "LicencePortal")
             param("CloudsmithRepoName", "sre-dev-core")
             param("CloudsmithOrganisation", "diligent")
-            param("PackageDirectory", "pkg")
+            param("PackageDirectory", ".")
             param("PackageType", "nuget")
             param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
             param("PackageVersion", "21.6.0-spe-469-0001")
