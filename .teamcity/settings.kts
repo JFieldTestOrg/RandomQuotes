@@ -330,5 +330,16 @@ object Test : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
+        step {
+            type = "CloudsmithPushPackageTESTONLY"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("PackageNames", "LicencePortal")
+            param("CloudsmithRepoName", "sre-dev-core")
+            param("CloudsmithOrganisation", "diligent")
+            param("PackageDirectory", "pkg")
+            param("PackageType", "nuget")
+            param("CloudsmithApiKey", "%env.CloudsmithApiKey%")
+            param("PackageVersion", "21.6.0-spe-469-0001")
+        }
     }
 })
