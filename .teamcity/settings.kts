@@ -315,6 +315,7 @@ object Test : BuildType({
         }
         powerShell {
             name = "cloudsmith pkg version test (1)"
+            enabled = false
             scriptMode = script {
                 content = """
                     ${'$'}errors = ''
