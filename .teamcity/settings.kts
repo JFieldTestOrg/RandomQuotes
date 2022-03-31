@@ -7,6 +7,7 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.powerShell
 import jetbrains.buildServer.configs.kotlin.v2019_2.projectFeatures.dockerRegistry
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -33,6 +34,8 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2021.2"
 
 project {
+
+    vcsRoot(MvcMovies)
 
     buildType(Build)
     buildType(Test)
@@ -243,6 +246,7 @@ object Test : BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+        root(MvcMovies)
     }
 
     steps {
@@ -330,5 +334,15 @@ object Test : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
+    }
+})
+
+object MvcMovies : GitVcsRoot({
+    name = "MvcMovies"
+    url = "https://github.com/DiligentCorp/MvcMovies.git"
+    branch = "refs/heads/develop"
+    authMethod = password {
+        userName = "diligent-svcteamcity"
+        password = "credentialsJSON:f6d8cb01-5aea-442c-91a7-28ede06bfbcb"
     }
 })
