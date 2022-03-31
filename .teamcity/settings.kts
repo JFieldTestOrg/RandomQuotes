@@ -245,7 +245,6 @@ object Test : BuildType({
     }
 
     vcs {
-        root(DslContext.settingsRoot)
         root(MvcMovies)
     }
 
