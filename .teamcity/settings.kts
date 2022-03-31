@@ -338,8 +338,8 @@ object Test : BuildType({
             type = "UpdateJiraField"
             executionMode = BuildStep.ExecutionMode.DEFAULT
             param("JiraEmail", "svc.authomation@diligent.com")
-            param("JiraApiKey", "%env.JiraApiKey%")
-            param("fieldValue", "WorkFlow - US Build out - the Very Final steps")
+            param("JiraApiKey", "WorkFlow - US Build out - Final steps")
+            param("fieldValue", "WorkFlow - US Build out - Final steps")
             param("fieldID", "summary")
         }
     }
