@@ -334,6 +334,14 @@ object Test : BuildType({
             param("org.jfrog.artifactory.selectedDeployableServer.useSpecs", "false")
             param("org.jfrog.artifactory.selectedDeployableServer.uploadSpecSource", "Job configuration")
         }
+        step {
+            type = "UpdateJiraField"
+            executionMode = BuildStep.ExecutionMode.DEFAULT
+            param("JiraEmail", "svc.authomation@diligent.com")
+            param("JiraApiKey", "%env.JiraApiKey%")
+            param("fieldValue", "WorkFlow - US Build out - the Very Final steps")
+            param("fieldID", "summary")
+        }
     }
 })
 
