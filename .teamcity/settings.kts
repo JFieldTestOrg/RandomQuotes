@@ -343,6 +343,10 @@ object Test : BuildType({
             param("fieldID", "summary")
         }
     }
+
+    requirements {
+        exists("env.AGENT_NAME")
+    }
 })
 
 object MvcMovies : GitVcsRoot({
