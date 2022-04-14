@@ -337,6 +337,11 @@ object Test : BuildType({
         step {
             type = "UpdateJiraField"
             executionMode = BuildStep.ExecutionMode.DEFAULT
+
+            conditions {
+                matches("findmeval", "findmeval")
+                doesNotMatch("findmeval", "findmeval")
+            }
             param("JiraEmail", "svc.authomation@diligent.com")
             param("JiraApiKey", "WorkFlow - US Build out - Final steps")
             param("fieldValue", "WorkFlow - US Build out - Final steps")
