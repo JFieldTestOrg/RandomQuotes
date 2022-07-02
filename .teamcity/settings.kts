@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.dockerSupport
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.DockerCommandStep
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetPublish
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dotnetTest
@@ -31,7 +32,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2021.2"
+version = "2022.04"
 
 project {
 
@@ -151,10 +152,10 @@ object Build : BuildType({
                 source = file {
                     path = "RandomQuotes/Dockerfile"
                 }
+                platform = DockerCommandStep.ImagePlatform.Linux
                 namesAndTags = "docker.cloudsmith.io/diligent/randomquotes/randomquotes:%build.number%"
                 commandArgs = "--pull"
             }
-            param("dockerImage.platform", "linux")
         }
         dockerCommand {
             name = "Docker tag latest"
