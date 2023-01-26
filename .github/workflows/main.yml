@@ -15,6 +15,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Collect Workflow Telemetry
+      uses: runforesight/foresight-workflow-kit-action@v1
+      if: ${{ always() }}
+      with:
+        api_key: 6162062b-7285-4ff0-a9dd-384cf01b5d26    
     - uses: actions/checkout@v1
       with:
         fetch-depth: '0'
@@ -68,6 +73,12 @@ jobs:
         path: '**/*.trx'
         reporter: dotnet-trx
         fail-on-error: 'false'
+    - name: Analyze Test and/or Coverage Results
+      uses: runforesight/foresight-test-kit-action@v1
+      if: ${{ always() }}
+      with:
+        api_key: 6162062b-7285-4ff0-a9dd-384cf01b5d26
+        test_path: '**/*.trx'
     - name: Publish
       run: dotnet publish --configuration Release /p:AssemblyVersion=${{ steps.determine_version.outputs.assemblySemVer }}
     - id: package
