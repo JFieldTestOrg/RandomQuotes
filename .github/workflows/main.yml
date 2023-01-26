@@ -78,6 +78,8 @@ jobs:
       if: ${{ always() }}
       with:
         api_key: 6162062b-7285-4ff0-a9dd-384cf01b5d26
+        test_framework: xunit2
+        test_format: trx 
         test_path: '**/*.trx'
     - name: Publish
       run: dotnet publish --configuration Release /p:AssemblyVersion=${{ steps.determine_version.outputs.assemblySemVer }}
@@ -146,31 +148,7 @@ jobs:
         draft: 'false'
         prerelease: 'false'
         target_commitish: ${{ github.sha }}
-    - name: Push to Octopus
-      uses: OctopusDeploy/push-package-action@v1.1.1
-      with:
-        api_key: ${{ secrets.OCTOPUS_API_TOKEN }}
-        packages: ${{ steps.package.outputs.artifacts }}
-        server: ${{ secrets.OCTOPUS_SERVER_URL }}
-        overwrite_mode: OverwriteExisting
-    - name: Generate Octopus Deploy build information
-      uses: xo-energy/action-octopus-build-information@v1.1.2
-      with:
-        octopus_api_key: ${{ secrets.OCTOPUS_API_TOKEN }}
-        octopus_project: RandomQuotes
-        octopus_server: ${{ secrets.OCTOPUS_SERVER_URL }}
-        push_version: ${{ steps.determine_version.outputs.semVer }}
-        push_package_ids: RandomQuotes
-        push_overwrite_mode: OverwriteExisting
-        output_path: octopus
-    - name: Create Octopus Release
-      uses: OctopusDeploy/create-release-action@v1.1.1
-      with:
-        api_key: ${{ secrets.OCTOPUS_API_TOKEN }}
-        project: RandomQuotes
-        server: ${{ secrets.OCTOPUS_SERVER_URL }}
-        deploy_to: Development
-        packages: ${{ steps.package.outputs.versions_new_line }}
+
 name: DotNET Core Build
 'on':
   workflow_dispatch: {}
